@@ -1,20 +1,17 @@
 import PropTypes from "prop-types";
 import Button from "./Button";
 
-const Numbers = ({ clickNumber }) => (
-  <div className="numbers">
-    <Button text="1" clickHandler={clickNumber} />
-    <Button text="2" clickHandler={clickNumber} />
-    <Button text="3" clickHandler={clickNumber} />
-    <Button text="4" clickHandler={clickNumber} />
-    <Button text="5" clickHandler={clickNumber} />
-    <Button text="6" clickHandler={clickNumber} />
-    <Button text="7" clickHandler={clickNumber} />
-    <Button text="8" clickHandler={clickNumber} />
-    <Button text="9" clickHandler={clickNumber} />
-    <Button text="0" clickHandler={clickNumber} />
-  </div>
-);
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+const Numbers = ({ clickNumber }) => {
+  return (
+    <div className="numbers">
+      {nums.map((num) => (
+        <Button key={num} text={num.toString()} clickHandler={clickNumber} />
+      ))}
+    </div>
+  );
+};
 
 Numbers.propTypes = {
   clickNumber: PropTypes.func.isRequired,
