@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { FC, useState } from 'react';
 
-import Functions from "./components/Functions";
-import MathOperations from "./components/MathOperations";
-import Numbers from "./components/Numbers";
-import Result from "./components/Result";
+import Functions from './components/Functions';
+import MathOperations from './components/MathOperations';
+import Numbers from './components/Numbers';
+import Result from './components/Result';
 
-import "./App.css";
+import './App.css';
 
-const App = () => {
-  const [stack, setStack] = useState("");
+const App: FC = () => {
+  const [stack, setStack] = useState('');
   // Asigna resultado
-  const clickHandler = (e) => {
-    if (stack === "" && e === "0") return false;
+  const clickHandler = (e: string) => {
+    if (stack === '' && e === '0') return false;
     setStack(stack + e);
   };
+
   // Realiza operacion
-  const handlerEqual = (e) => {
-    const re = new RegExp(/[\+\-\*\/]/, "g");
+  const handlerEqual = (e: string) => {
+    // eslint-disable-next-line no-useless-escape
+    const re = new RegExp(/[\+\-\*\/]/, 'g');
     const op = stack.search(re),
       nums = stack.split(stack[op]),
       [num1, num2] = nums;
@@ -25,29 +27,31 @@ const App = () => {
     console.log(num1);
     console.log(num2);
     switch (stack[op]) {
-      case "+":
+      case '+':
         res = Number(num1) + Number(num2);
         break;
-      case "-":
+      case '-':
         res = Number(num1) - Number(num2);
         break;
-      case "*":
+      case '*':
         res = Number(num1) * Number(num2);
         break;
-      case "/":
-        res = num2 === "0" ? "Error" : Number(num1) / Number(num2);
+      case '/':
+        res = num2 === '0' ? 'Error' : Number(num1) / Number(num2);
         break;
       default:
-        res = "Error";
+        res = 'Error';
         break;
     }
     setStack(res.toString());
   };
+
   // Asigna operacion
-  const handlerOperation = (op) => {
+  const handlerOperation = (op: string) => {
+    // eslint-disable-next-line no-useless-escape
     const index = stack.search(/[\+\-\*\/]/g),
-      ops = ["+", "-", "*", "/"];
-    let newOp = "";
+      ops = ['+', '-', '*', '/'];
+    let newOp = '';
     if (index > 0) {
       // Ya tiene operacion
       // Sale si el ultimo caracter no es operacion
@@ -60,10 +64,14 @@ const App = () => {
     }
     setStack(newOp);
   };
+
   // Limpia pantalla
-  const handlerClear = (e) => setStack("");
+  const handlerClear = (e: string) => setStack('');
+
   // Borra numero u operacion
-  const handlerDelete = (e) => setStack(stack.slice(0, stack.length - 1));
+  const handlerDelete = (e: string) =>
+    setStack(stack.slice(0, stack.length - 1));
+
   return (
     <main className="react-calculator">
       <Result value={stack} />
