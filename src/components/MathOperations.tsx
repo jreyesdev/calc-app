@@ -1,7 +1,12 @@
-import PropTypes from "prop-types";
-import Button from "./Button";
+import { FC } from 'react';
+import Button, { ButtonClickHandler } from './Button';
 
-const MathOperations = ({ clickOperation, clickEqual }) => (
+type Props = {
+  clickOperation: ButtonClickHandler;
+  clickEqual: ButtonClickHandler;
+};
+
+const MathOperations: FC<Props> = ({ clickOperation, clickEqual }) => (
   <section className="math-operations">
     <Button text="+" clickHandler={clickOperation} />
     <Button text="-" clickHandler={clickOperation} />
@@ -10,10 +15,5 @@ const MathOperations = ({ clickOperation, clickEqual }) => (
     <Button text="=" clickHandler={clickEqual} />
   </section>
 );
-
-MathOperations.propTypes = {
-  clickEqual: PropTypes.func.isRequired,
-  clickOperation: PropTypes.func.isRequired,
-};
 
 export default MathOperations;
