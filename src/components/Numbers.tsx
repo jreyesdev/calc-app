@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
-import Button from "./Button";
+import { FC } from 'react';
+import Button, { ButtonClickHandler } from './Button';
+
+type Props = {
+  clickNumber: ButtonClickHandler;
+};
 
 const nums = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
-const Numbers = ({ clickNumber }) => {
+const Numbers: FC<Props> = ({ clickNumber }) => {
   return (
     <div className="numbers">
       {nums.map((num) => (
@@ -11,10 +15,6 @@ const Numbers = ({ clickNumber }) => {
       ))}
     </div>
   );
-};
-
-Numbers.propTypes = {
-  clickNumber: PropTypes.func.isRequired,
 };
 
 export default Numbers;
